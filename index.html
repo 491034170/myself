@@ -7,7 +7,8 @@
   <meta name="description" content="王鑫的个人主页：计算机技术、全栈项目、学习与创业思考。"/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- 可换国内镜像，这里用系统字体兜底 -->
+
+  <!-- 站点基础样式 -->
   <style>
     :root{
       --bg:#0b0f1a; --ink:#e6f0ff; --muted:#96a4c2;
@@ -16,9 +17,15 @@
       --shadow:0 10px 40px rgba(0,0,0,.45), inset 0 0 40px rgba(127,90,240,.08);
     }
     *{box-sizing:border-box} html,body{height:100%}
-    body{margin:0;background:radial-gradient(1200px 800px at 20% -10%,rgba(127,90,240,.15),transparent),
-                   radial-gradient(1000px 600px at 120% 10%,rgba(65,209,255,.12),transparent),
-                   var(--bg); color:var(--ink); font:16px/1.65 ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans CJK SC",sans-serif;}
+    body{
+      margin:0;
+      background:
+        radial-gradient(1200px 800px at 20% -10%,rgba(127,90,240,.15),transparent),
+        radial-gradient(1000px 600px at 120% 10%,rgba(65,209,255,.12),transparent),
+        var(--bg);
+      color:var(--ink);
+      font:16px/1.65 ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans CJK SC",sans-serif;
+    }
     a{color:var(--brand)} img{max-width:100%;display:block}
     .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
     header{position:sticky;top:0;z-index:50;background:linear-gradient(180deg,rgba(11,15,26,.9),rgba(11,15,26,.55));backdrop-filter:blur(6px);border-bottom:1px solid var(--border)}
@@ -47,6 +54,14 @@
     .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
     .sec-h{font-size:28px;margin:0 0 18px}
     .kbd{font:600 12px/1 ui-monospace,Menlo,Consolas,monospace;background:#0a1324;border:1px solid #1e2b45;border-radius:8px;padding:4px 8px;color:#7ecfff}
+
+    /* —— 微信弹窗（不依赖 Tailwind） —— */
+    .modal { display:none; position:fixed; inset:0; z-index:1000; background:rgba(0,0,0,.6); align-items:center; justify-content:center; }
+    .modal.open { display:flex; }
+    .modal-content { background:#fff; color:#111; padding:20px; border-radius:14px; width:min(90vw,360px); box-shadow:0 20px 60px rgba(0,0,0,.35); animation:modalFade .22s ease-out; position:relative; text-align:center; }
+    .modal-close { position:absolute; right:10px; top:10px; background:transparent; border:0; font-size:18px; color:#666; cursor:pointer; }
+    .modal-close:hover{ color:#000; }
+    @keyframes modalFade{ from{opacity:0; transform:translateY(6px) scale(.98);} to{opacity:1; transform:translateY(0) scale(1);} }
   </style>
 </head>
 <body>
@@ -76,7 +91,7 @@
         </div>
         <div class="cta">
           <a class="btn primary" href="#projects">查看项目</a>
-          <a class="btn" href="https://github.com/你的GitHub" target="_blank" rel="noreferrer">GitHub</a>
+          <a class="btn" href="https://github.com/491034170" target="_blank" rel="noreferrer">GitHub</a>
           <a class="btn" href="#contact">获取简历</a>
         </div>
       </div>
@@ -121,44 +136,31 @@
     </section>
 
     <section id="contact">
-  <h3 class="sec-h">联系王鑫</h3>
-  <div class="card">
-    <p class="muted">合作开发、技术支持或校园技术分享，欢迎留言。</p>
-   <div class="cta">
-  <!-- 邮箱 -->
-  <a class="btn primary" href="mailto:491034170@qq.com">邮箱联系</a>
+      <h3 class="sec-h">联系王鑫</h3>
+      <div class="card">
+        <p class="muted">合作开发、技术支持或校园技术分享，欢迎留言。</p>
 
-  <!-- GitHub 主页 -->
-  <a class="btn" href="https://github.com/491034170" target="_blank" rel="noreferrer">GitHub</a>
+        <div class="cta">
+          <!-- 邮箱 -->
+          <a class="btn primary" href="mailto:491034170@qq.com">邮箱联系</a>
 
-  <!-- 微信名片按钮（不跳转，打开弹窗） -->
-  <button class="btn" id="wechatBtn" type="button">微信名片</button>
-</div>
+          <!-- GitHub 主页 -->
+          <a class="btn" href="https://github.com/491034170" target="_blank" rel="noreferrer">GitHub</a>
 
-<!-- 微信二维码弹窗（不依赖 Tailwind） -->
-<div id="wechatModal" class="modal" aria-hidden="true">
-  <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="wechatTitle">
-    <button class="modal-close" aria-label="关闭" id="wechatClose">✕</button>
-    <h3 id="wechatTitle" style="margin:0 0 10px;font-weight:700;">扫码加我微信</h3>
-    <img src="assets/weixin-qrcode.png" alt="微信二维码" style="width:220px;height:220px;margin:0 auto;border-radius:10px;border:1px solid #eee;"/>
-  </div>
-</div>
+          <!-- 微信名片按钮（打开弹窗） -->
+          <button class="btn" id="wechatBtn" type="button">微信名片</button>
+        </div>
 
-<!-- 这里结束 card 和 section（你原来少了） -->
-</div>  <!-- .card -->
-</section>
-
-<!-- 弹窗 -->
-<div id="wechatModal" class="hidden fixed inset-0 bg-black/60 flex items-center justify-center z-50">
-  <div class="bg-white p-6 rounded-xl shadow-lg relative">
-    <button class="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
-      onclick="document.getElementById('wechatModal').classList.add('hidden')">✕</button>
-    <h3 class="text-lg font-bold mb-4">扫码加我微信</h3>
-    <img src="assets/weixin-qrcode.png" alt="微信二维码" class="w-48 h-48 mx-auto rounded-lg border"/>
-  </div>
-</div>
-
-
+        <!-- 微信二维码弹窗（不依赖 Tailwind） -->
+        <div id="wechatModal" class="modal" aria-hidden="true">
+          <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="wechatTitle">
+            <button class="modal-close" aria-label="关闭" id="wechatClose">✕</button>
+            <h3 id="wechatTitle" style="margin:0 0 10px;font-weight:700;">扫码加我微信</h3>
+            <img src="assets/weixin-qrcode.png" alt="微信二维码" style="width:220px;height:220px;margin:0 auto;border-radius:10px;border:1px solid #eee;"/>
+          </div>
+        </div>
+      </div> <!-- .card -->
+    </section>
   </main>
 
   <footer>
@@ -166,6 +168,24 @@
   </footer>
 
   <script src="script.js"></script>
+
+  <!-- 最小弹窗脚本（也可以放进 script.js 末尾） -->
+  <script>
+    (function () {
+      const modal = document.getElementById('wechatModal');
+      const btn   = document.getElementById('wechatBtn');
+      const close = document.getElementById('wechatClose');
+      if (!modal || !btn || !close) return;
+      const open = () => { modal.classList.add('open'); modal.setAttribute('aria-hidden','false'); };
+      const hide = () => { modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); };
+      btn.addEventListener('click', open);
+      close.addEventListener('click', hide);
+      modal.addEventListener('click', (e) => { if (e.target === modal) hide(); });
+      window.addEventListener('keydown', (e) => { if (e.key === 'Escape') hide(); });
+      // 页脚年份
+      const y = document.getElementById('y'); if (y) y.textContent = new Date().getFullYear();
+    })();
+  </script>
 
   <!-- 简单 SEO：结构化数据 -->
   <script type="application/ld+json">
@@ -175,13 +195,8 @@
     "name":"王鑫",
     "jobTitle":"计算机技术 / 全栈方向",
     "url":"https://你的域名或 pages.dev",
-    "sameAs":["https://github.com/你的GitHub"]
+    "sameAs":["https://github.com/491034170"]
   }
   </script>
 </body>
 </html>
-
-
-
-
-
