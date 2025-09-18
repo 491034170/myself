@@ -1,0 +1,8 @@
+/* 额外的小装饰，如果不需要可删除 */
+.card .title::after{
+  content:"";
+  display:block;
+  width:36px;height:3px;margin:.4rem 0 0;
+  background:linear-gradient(90deg,#41d1ff,#7f5af0);
+  border-radius:6px;
+}

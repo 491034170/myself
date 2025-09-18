@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>王鑫｜计算机技术 · 全栈成长</title>
+  <meta name="description" content="王鑫的个人主页：计算机技术、全栈项目、学习与创业思考。"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- 可换国内镜像，这里用系统字体兜底 -->
+  <style>
+    :root{
+      --bg:#0b0f1a; --ink:#e6f0ff; --muted:#96a4c2;
+      --brand:#41d1ff; --brand2:#7f5af0; --accent:#00ffb2; --danger:#ff5470;
+      --card:#101828; --border:#22314e;
+      --shadow:0 10px 40px rgba(0,0,0,.45), inset 0 0 40px rgba(127,90,240,.08);
+    }
+    *{box-sizing:border-box} html,body{height:100%}
+    body{margin:0;background:radial-gradient(1200px 800px at 20% -10%,rgba(127,90,240,.15),transparent),
+                   radial-gradient(1000px 600px at 120% 10%,rgba(65,209,255,.12),transparent),
+                   var(--bg); color:var(--ink); font:16px/1.65 ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans CJK SC",sans-serif;}
+    a{color:var(--brand)} img{max-width:100%;display:block}
+    .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+    header{position:sticky;top:0;z-index:50;background:linear-gradient(180deg,rgba(11,15,26,.9),rgba(11,15,26,.55));backdrop-filter:blur(6px);border-bottom:1px solid var(--border)}
+    .nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+    .logo{font-weight:800;letter-spacing:.5px}
+    .glow{background:linear-gradient(90deg,var(--brand),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:0 0 20px rgba(65,209,255,.35)}
+    .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.65rem 1rem;border:1px solid var(--border);border-radius:12px;text-decoration:none;color:var(--ink);transition:.25s;box-shadow:var(--shadow)}
+    .btn:hover{transform:translateY(-2px);border-color:var(--brand);box-shadow:0 10px 30px rgba(65,209,255,.25)}
+    .btn.primary{background:linear-gradient(135deg,var(--brand) 0%,var(--brand2) 100%);border:none;color:#070a12}
+    main{position:relative;overflow:hidden}
+    #fx{position:fixed;inset:0;z-index:-1}
+    .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:center;min-height:72vh;padding:56px 0}
+    .hero h1{font-size:clamp(28px,5vw,54px);margin:.2em 0 .3em}
+    .sub{color:var(--muted)}
+    .chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+    .chip{border:1px solid var(--border);padding:.35rem .6rem;border-radius:999px;color:var(--muted);font-size:.9rem}
+    section{padding:60px 0;border-top:1px dashed rgba(255,255,255,.06)}
+    .grid{display:grid;gap:18px}
+    @media(min-width:860px){.grid.cols-3{grid-template-columns:repeat(3,1fr)}}
+    .card{background:linear-gradient(180deg,rgba(16,24,40,.5),rgba(16,24,40,.2));border:1px solid var(--border);border-radius:18px;padding:18px;box-shadow:var(--shadow);transition:.25s}
+    .card:hover{transform:translateY(-4px);border-color:var(--brand)}
+    .title{font-weight:700;margin-bottom:.4rem}
+    .muted{color:var(--muted)}
+    footer{padding:40px 0;color:var(--muted);text-align:center}
+    .typing{border-right:2px solid var(--brand);white-space:nowrap;overflow:hidden}
+    .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
+    .sec-h{font-size:28px;margin:0 0 18px}
+    .kbd{font:600 12px/1 ui-monospace,Menlo,Consolas,monospace;background:#0a1324;border:1px solid #1e2b45;border-radius:8px;padding:4px 8px;color:#7ecfff}
+  </style>
+</head>
+<body>
+  <canvas id="fx" aria-hidden="true"></canvas>
+
+  <header>
+    <div class="wrap nav">
+      <div class="logo">Wang<span class="glow">Xin</span></div>
+      <nav style="display:flex;gap:12px;flex-wrap:wrap">
+        <a class="btn" href="#projects">项目</a>
+        <a class="btn" href="#skills">技能</a>
+        <a class="btn" href="#contact">联系</a>
+        <a class="btn primary" href="mailto:yourmail@example.com">合作洽谈</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div>
+        <div class="kbd">王鑫 · 计算机科学与技术</div>
+        <h1>把想法变成<strong class="glow">产品</strong></h1>
+        <h2 class="typing" data-words='["全栈实践","前后端联调","数据库设计","性能优化","创业探索"]'></h2>
+        <p class="sub">我喜欢用清晰的工程思维解决真实问题：从后端 API 到前端交互，再到数据库与部署上线，形成完整闭环。</p>
+        <div class="chips">
+          <span class="chip">HTML/CSS/JS</span><span class="chip">Node.js/Express</span><span class="chip">Postgres/Supabase</span><span class="chip">Cloudflare Pages/Functions</span><span class="chip">Render</span>
+        </div>
+        <div class="cta">
+          <a class="btn primary" href="#projects">查看项目</a>
+          <a class="btn" href="https://github.com/你的GitHub" target="_blank" rel="noreferrer">GitHub</a>
+          <a class="btn" href="#contact">获取简历</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="title">近期目标</div>
+        <ul class="muted" style="margin:0;padding-left:18px">
+          <li>巩固全栈：Express + Postgres + Cloudflare Functions</li>
+          <li>构建个人产品 MVP：从 0 到 1 上线</li>
+          <li>打磨文档与案例，服务中小团队数字化需求</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="projects">
+      <h3 class="sec-h">精选项目</h3>
+      <div class="grid cols-3">
+        <article class="card">
+          <div class="title">Todo API + 前端</div>
+          <p class="muted">Express 构建 CRUD，Postgres 持久化，前端用原生 fetch 调用。</p>
+          <a class="btn" href="#" target="_blank" rel="noreferrer">查看代码</a>
+        </article>
+        <article class="card">
+          <div class="title">页面计数器（无后端）</div>
+          <p class="muted">Cloudflare Pages Functions + D1，秒级上线、免费层友好。</p>
+          <a class="btn" href="#" target="_blank" rel="noreferrer">在线演示</a>
+        </article>
+        <article class="card">
+          <div class="title">留言板</div>
+          <p class="muted">Supabase 认证 + 表单 + 速审机制，支持匿名与关键词过滤。</p>
+          <a class="btn" href="#" target="_blank" rel="noreferrer">设计文档</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="skills">
+      <h3 class="sec-h">技能矩阵</h3>
+      <div class="grid cols-3">
+        <div class="card"><div class="title">前端</div><p class="muted">语义化 HTML、模块化 CSS、原生 JS、响应式布局、性能优化。</p></div>
+        <div class="card"><div class="title">后端</div><p class="muted">REST 设计、鉴权、数据库建模、日志监控、错误追踪。</p></div>
+        <div class="card"><div class="title">部署</div><p class="muted">Cloudflare Pages/Functions、Render、Supabase、域名与 HTTPS。</p></div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h3 class="sec-h">联系王鑫</h3>
+      <div class="card">
+        <p class="muted">合作开发、技术支持或校园技术分享，欢迎留言。</p>
+        <div class="cta">
+          <a class="btn primary" href="mailto:yourmail@example.com">邮箱联系</a>
+          <a class="btn" href="https://github.com/你的GitHub" target="_blank" rel="noreferrer">GitHub</a>
+          <a class="btn" href="weixin-qrcode.png" target="_blank" rel="noreferrer">微信名片</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="y"></span> 王鑫 · Keep Building 🛠️
+  </footer>
+
+  <script src="script.js"></script>
+
+  <!-- 简单 SEO：结构化数据 -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Person",
+    "name":"王鑫",
+    "jobTitle":"计算机技术 / 全栈方向",
+    "url":"https://你的域名或 pages.dev",
+    "sameAs":["https://github.com/你的GitHub"]
+  }
+  </script>
+</body>
+</html>
