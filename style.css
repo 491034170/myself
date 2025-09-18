@@ -26,3 +26,11 @@
   font-size: 18px;
   cursor: pointer;
 }
+
+.btn{
+  background: transparent;      /* 让按钮和 <a> 一样是透明底 */
+  appearance: none;             /* 去掉浏览器默认Button风格 */
+  -webkit-appearance: none;
+  cursor: pointer;
+}
+
