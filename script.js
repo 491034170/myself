@@ -1,75 +1,106 @@
-// 打字机效果
-(function(){
-  const el = document.querySelector('.typing');
-  if(!el) return;
-  let words = [];
-  try { words = JSON.parse(el.getAttribute('data-words') || '[]'); } catch(e){}
-  let i = 0, j = 0, dir = 1; // dir: 1=打字, -1=回删
-  function tick(){
-    if(words.length === 0) return;
-    const w = words[i] || '';
-    j += dir;
-    el.textContent = w.slice(0, j);
-    if(dir === 1 && j === w.length){ // 到头停一会
-      setTimeout(()=>{ dir = -1; }, 900);
-    } else if(dir === -1 && j === 0){
-      i = (i + 1) % words.length;
-      dir = 1;
-    }
-    setTimeout(tick, dir === 1 ? 80 : 40);
-  }
-  tick();
-})();
-
-// 背景 Canvas（轻量，不抖动）
-(function(){
+// 粒子背景（轻量版）
+(() => {
   const c = document.getElementById('fx');
-  if(!c) return;
-  const dpr = Math.min(window.devicePixelRatio || 1, 2);
   const ctx = c.getContext('2d');
-  let w, h, t = 0;
+  let w, h, particles;
+  const R = () => Math.random();
+
   function resize(){
-    w = c.width = Math.floor(innerWidth * dpr);
-    h = c.height = Math.floor(innerHeight * dpr);
-    c.style.width = innerWidth + 'px';
-    c.style.height = innerHeight + 'px';
+    w = c.width = innerWidth;
+    h = c.height = innerHeight;
+    particles = Array.from({length: Math.min(140, Math.floor(w*h/12000))}, () => ({
+      x: R()*w, y: R()*h,
+      vx: (R()-.5)*.6, vy: (R()-.5)*.6,
+      r: 1.2 + R()*1.6
+    }));
   }
-  window.addEventListener('resize', resize, {passive:true});
+  addEventListener('resize', resize, {passive:true});
   resize();
 
   function loop(){
-    t += 0.003;
     ctx.clearRect(0,0,w,h);
-    for(let i=0;i<60;i++){
-      const x = (Math.sin(t + i)*0.5 + 0.5) * w;
-      const y = (Math.cos(t*1.3 + i)*0.5 + 0.5) * h;
+    // 连接线
+    for (let i=0;i<particles.length;i++){
+      const p = particles[i];
+      p.x += p.vx; p.y += p.vy;
+      if(p.x<0||p.x>w) p.vx*=-1;
+      if(p.y<0||p.y>h) p.vy*=-1;
       ctx.beginPath();
-      ctx.arc(x, y, 1.5*dpr, 0, Math.PI*2);
-      ctx.fillStyle = 'rgba(127,90,240,0.35)';
+      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle = 'rgba(127,90,240,.9)';
       ctx.fill();
+
+      for (let j=i+1;j<particles.length;j++){
+        const q = particles[j];
+        const dx = p.x-q.x, dy = p.y-q.y;
+        const d2 = dx*dx + dy*dy;
+        if (d2 < 120*120){
+          ctx.strokeStyle = `rgba(65,209,255,${1 - d2/14400})`;
+          ctx.lineWidth = .6;
+          ctx.beginPath();
+          ctx.moveTo(p.x,p.y); ctx.lineTo(q.x,q.y); ctx.stroke();
+        }
+      }
     }
     requestAnimationFrame(loop);
   }
   loop();
 })();
 
-// 微信弹窗开关 + 锁定背景滚动
-(function(){
+// 打字机效果（不依赖库）
+(() => {
+  const el = document.querySelector('.typing');
+  if(!el) return;
+  const words = JSON.parse(el.getAttribute('data-words')||'[]');
+  let i=0, j=0, erase=false;
+
+  function tick(){
+    const word = words[i] || "";
+    el.textContent = erase ? word.slice(0, j--) : word.slice(0, j++);
+    if(!erase && j > word.length + 5){ erase = true; }
+    if(erase && j <= 0){ erase = false; i = (i+1)%words.length; }
+    setTimeout(tick, erase ? 45 : 85);
+  }
+  tick();
+})();
+
+// 年份
+document.getElementById('y').textContent = new Date().getFullYear();
+
+// 平滑滚动（锚点）
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const id = a.getAttribute('href').slice(1);
+    const t = document.getElementById(id) || document.querySelector(`[id="${id}"]`);
+    if(t){ e.preventDefault(); t.scrollIntoView({behavior:'smooth', block:'start'}); }
+  });
+});
+// 微信名片弹窗逻辑（无依赖）
+<script>
+(function () {
   const modal = document.getElementById('wechatModal');
   const btn   = document.getElementById('wechatBtn');
   const close = document.getElementById('wechatClose');
-  const year  = document.getElementById('y');
-  if(year) year.textContent = new Date().getFullYear();
-  if(!modal || !btn || !close) return;
+  if (!modal || !btn || !close) return;
 
-  const lock = () => { document.body.style.overflow='hidden'; document.body.style.touchAction='none'; };
-  const unlock = () => { document.body.style.overflow=''; document.body.style.touchAction=''; };
-
-  const open = () => { modal.classList.add('open'); modal.setAttribute('aria-hidden','false'); lock(); };
-  const hide = () => { modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); unlock(); };
+  const open = () => {
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden','false');
+    document.body.classList.add('modal-lock');   // 锁住背景滚动
+  };
+  const hide = () => {
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden','true');
+    document.body.classList.remove('modal-lock'); // 解除锁定
+  };
 
   btn.addEventListener('click', open);
   close.addEventListener('click', hide);
   modal.addEventListener('click', (e) => { if (e.target === modal) hide(); });
   window.addEventListener('keydown', (e) => { if (e.key === 'Escape') hide(); });
+
+  const y = document.getElementById('y'); if (y) y.textContent = new Date().getFullYear();
 })();
+</script>
+
+
