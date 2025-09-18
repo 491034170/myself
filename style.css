@@ -47,3 +47,41 @@
   box-shadow:0 6px 20px rgba(65,209,255,.25);
 }
 
+/* 让弹窗内容不超过屏幕，并在内部滚动 */
+.modal-content{
+  max-height: 90vh;               /* 弹窗本体最高不超过视口 90% */
+  max-width: min(92vw, 560px);    /* 适配移动端与桌面 */
+  overflow: auto;                  /* 内容超出时，弹窗内部滚动 */
+  -webkit-overflow-scrolling: touch; /* 移动端顺滑滚动 */
+  padding: 24px;
+}
+
+/* 二维码图：自适应，保持比例，不被拉伸 */
+#wechatQR{
+  display: block;
+  margin: 0 auto;
+  width: 100%;            /* 占满弹窗宽度 */
+  max-width: 420px;       /* 但不超过 420px */
+  height: auto;           /* 按比例缩放 */
+  max-height: 70vh;       /* 不超过视口 70% 高 */
+  object-fit: contain;    /* 保持完整显示 */
+  border-radius: 12px;
+  border: 1px solid #eee;
+  box-shadow: 0 6px 20px rgba(65,209,255,.25);
+}
+
+/* 打开弹窗时锁住页面滚动，避免“抽动” */
+body.modal-lock{
+  overflow: hidden;
+  touch-action: none;     /* 移动端也锁住背景滚动 */
+}
+
+/* 修复 button 默认白底：之前如果还没加这段，补上 */
+.btn{
+  background: transparent;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+}
+
+
