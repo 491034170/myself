@@ -34,3 +34,16 @@
   cursor: pointer;
 }
 
+#wechatQR{
+  display:block;
+  margin:0 auto;
+  width:260px;        /* 你想显示的大概宽度 */
+  max-width:80vw;     /* 小屏不溢出 */
+  max-height:70vh;    /* 竖屏不溢出 */
+  height:auto;        /* 按比例缩放，避免变形 */
+  object-fit:contain; /* 保持完整显示 */
+  border-radius:12px;
+  border:1px solid #eee;
+  box-shadow:0 6px 20px rgba(65,209,255,.25);
+}
+
