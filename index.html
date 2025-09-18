@@ -128,12 +128,25 @@
   <!-- 邮箱 -->
   <a class="btn primary" href="mailto:491034170@qq.com">邮箱联系</a>
 
-  <!-- GitHub -->
+  <!-- GitHub 主页 -->
   <a class="btn" href="https://github.com/491034170" target="_blank" rel="noreferrer">GitHub</a>
 
-  <!-- 微信名片按钮 -->
-  <button class="btn" onclick="document.getElementById('wechatModal').classList.remove('hidden')">微信名片</button>
+  <!-- 微信名片按钮（不跳转，打开弹窗） -->
+  <button class="btn" id="wechatBtn" type="button">微信名片</button>
 </div>
+
+<!-- 微信二维码弹窗（不依赖 Tailwind） -->
+<div id="wechatModal" class="modal" aria-hidden="true">
+  <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="wechatTitle">
+    <button class="modal-close" aria-label="关闭" id="wechatClose">✕</button>
+    <h3 id="wechatTitle" style="margin:0 0 10px;font-weight:700;">扫码加我微信</h3>
+    <img src="assets/weixin-qrcode.png" alt="微信二维码" style="width:220px;height:220px;margin:0 auto;border-radius:10px;border:1px solid #eee;"/>
+  </div>
+</div>
+
+<!-- 这里结束 card 和 section（你原来少了） -->
+</div>  <!-- .card -->
+</section>
 
 <!-- 弹窗 -->
 <div id="wechatModal" class="hidden fixed inset-0 bg-black/60 flex items-center justify-center z-50">
@@ -167,6 +180,7 @@
   </script>
 </body>
 </html>
+
 
 
 
