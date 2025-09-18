@@ -124,18 +124,27 @@
   <h3 class="sec-h">联系王鑫</h3>
   <div class="card">
     <p class="muted">合作开发、技术支持或校园技术分享，欢迎留言。</p>
-    <div class="cta">
-      <!-- 邮箱联系 -->
-      <a class="btn primary" href="mailto:491034170@qq.com" target="_blank" rel="noreferrer">邮箱联系</a>
+   <div class="cta">
+  <!-- 邮箱 -->
+  <a class="btn primary" href="mailto:491034170@qq.com">邮箱联系</a>
 
-      <!-- GitHub主页 -->
-      <a class="btn" href="https://github.com/491034170" target="_blank" rel="noreferrer">GitHub</a>
+  <!-- GitHub -->
+  <a class="btn" href="https://github.com/491034170" target="_blank" rel="noreferrer">GitHub</a>
 
-      <!-- 微信名片（假设你有名片二维码图片） -->
-      <a class="btn" href="assets/weixin-qrcode.png" target="_blank" rel="noreferrer">微信名片</a>
-    </div>
+  <!-- 微信名片按钮 -->
+  <button class="btn" onclick="document.getElementById('wechatModal').classList.remove('hidden')">微信名片</button>
+</div>
+
+<!-- 弹窗 -->
+<div id="wechatModal" class="hidden fixed inset-0 bg-black/60 flex items-center justify-center z-50">
+  <div class="bg-white p-6 rounded-xl shadow-lg relative">
+    <button class="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
+      onclick="document.getElementById('wechatModal').classList.add('hidden')">✕</button>
+    <h3 class="text-lg font-bold mb-4">扫码加我微信</h3>
+    <img src="assets/weixin.png" alt="微信二维码" class="w-48 h-48 mx-auto rounded-lg border"/>
   </div>
-</section>
+</div>
+
 
   </main>
 
@@ -158,5 +167,6 @@
   </script>
 </body>
 </html>
+
 
 
