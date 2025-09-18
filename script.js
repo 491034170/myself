@@ -75,32 +75,3 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
     if(t){ e.preventDefault(); t.scrollIntoView({behavior:'smooth', block:'start'}); }
   });
 });
-// 微信名片弹窗逻辑（无依赖）
-<script>
-(function () {
-  const modal = document.getElementById('wechatModal');
-  const btn   = document.getElementById('wechatBtn');
-  const close = document.getElementById('wechatClose');
-  if (!modal || !btn || !close) return;
-
-  const open = () => {
-    modal.classList.add('open');
-    modal.setAttribute('aria-hidden','false');
-    document.body.classList.add('modal-lock');   // 锁住背景滚动
-  };
-  const hide = () => {
-    modal.classList.remove('open');
-    modal.setAttribute('aria-hidden','true');
-    document.body.classList.remove('modal-lock'); // 解除锁定
-  };
-
-  btn.addEventListener('click', open);
-  close.addEventListener('click', hide);
-  modal.addEventListener('click', (e) => { if (e.target === modal) hide(); });
-  window.addEventListener('keydown', (e) => { if (e.key === 'Escape') hide(); });
-
-  const y = document.getElementById('y'); if (y) y.textContent = new Date().getFullYear();
-})();
-</script>
-
-
