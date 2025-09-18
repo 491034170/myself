@@ -1,8 +1,28 @@
-/* 额外的小装饰，如果不需要可删除 */
-.card .title::after{
-  content:"";
-  display:block;
-  width:36px;height:3px;margin:.4rem 0 0;
-  background:linear-gradient(90deg,#41d1ff,#7f5af0);
-  border-radius:6px;
+/* 卡片标题装饰 */
+.card .title::after {
+  content: "";
+  display: block;
+  width: 36px;
+  height: 3px;
+  margin: 0.4rem 0 0;
+  background: linear-gradient(90deg, #41d1ff, #7f5af0);
+  border-radius: 6px;
+}
+
+/* 微信弹窗样式 */
+#wechatModal img {
+  border: 2px solid #41d1ff;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(65, 209, 255, 0.3);
+}
+
+#wechatModal h3 {
+  color: #0b0f1a;
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+#wechatModal button {
+  font-size: 18px;
+  cursor: pointer;
 }
