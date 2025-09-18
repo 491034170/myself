@@ -75,3 +75,20 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
     if(t){ e.preventDefault(); t.scrollIntoView({behavior:'smooth', block:'start'}); }
   });
 });
+// 微信名片弹窗逻辑（无依赖）
+(function () {
+  const modal = document.getElementById('wechatModal');
+  const btn   = document.getElementById('wechatBtn');
+  const close = document.getElementById('wechatClose');
+
+  if (!modal || !btn || !close) return;
+
+  const open  = () => { modal.classList.add('open'); modal.setAttribute('aria-hidden','false'); };
+  const hide  = () => { modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); };
+
+  btn.addEventListener('click', open);
+  close.addEventListener('click', hide);
+  modal.addEventListener('click', (e) => { if (e.target === modal) hide(); }); // 点背景关闭
+  window.addEventListener('keydown', (e) => { if (e.key === 'Escape') hide(); }); // Esc 关闭
+})();
+
